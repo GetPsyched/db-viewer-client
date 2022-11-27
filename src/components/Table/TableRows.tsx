@@ -8,17 +8,13 @@ const TableRows = ({ data }: TableRowProps) => {
     return (
       <tr key={`row-${row_index}`}>
         {entry.map(([key, value], col_index) => {
-          return <td key={`column-${col_index}`}>{ value }</td>
+          return <td key={`column-${col_index}`}>{value}</td>;
         })}
       </tr>
     );
   });
 
-  return (
-    <tbody>
-      {rows}
-    </tbody>
-  );
+  return <tbody>{rows}</tbody>;
 };
 
 export default TableRows;

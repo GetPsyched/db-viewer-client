@@ -4,9 +4,7 @@ interface TableHeaderProps {
 
 const TableHeader = ({ columns }: TableHeaderProps): JSX.Element => {
   const headers = columns.map((column: string, index) => {
-    return (
-      <th key={`th-${index}`}>{ column }</th>
-    );
+    return <th key={`th-${index}`}>{column}</th>;
   });
 
   return (

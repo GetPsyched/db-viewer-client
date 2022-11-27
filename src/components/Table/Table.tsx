@@ -13,6 +13,6 @@ const Table = ({ data, columns }: TableProps) => {
       <TableRows data={data} />
     </table>
   );
-}
+};
 
 export default Table;

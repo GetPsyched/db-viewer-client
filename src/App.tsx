@@ -1,5 +1,5 @@
 import axios from "axios";
-import React from "react";
+import * as React from "react";
 
 import "./App.css";
 import logo from "./assets/logo.svg";
