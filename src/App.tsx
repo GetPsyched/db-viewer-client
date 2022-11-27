@@ -1,6 +1,7 @@
+import axios from "axios";
 import React from "react";
 
-import "./App.css"
+import "./App.css";
 import logo from "./assets/logo.svg";
 
 function App() {
@@ -17,6 +18,10 @@ function App() {
     };
     const dsn = target.dsn.value;
     const query = target.query.value;
+
+    axios
+      .post("/", { dsn: dsn, query: query })
+      .then((res) => setData(res.data));
 
     setDsn(true);
     dsnInput.forEach((value) => {
