@@ -22,7 +22,10 @@ function App() {
 
     axios
       .post("/", { dsn: dsn, query: query })
-      .then((res) => setData(res.data));
+      .then((res) => setData(res.data))
+      .catch((err: Error) => {
+        console.error(err.message);
+      });
 
     setDsn(true);
     dsnInput.forEach((value) => {
