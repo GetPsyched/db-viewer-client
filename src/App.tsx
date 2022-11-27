@@ -3,6 +3,7 @@ import React from "react";
 
 import "./App.css";
 import logo from "./assets/logo.svg";
+import Table from "./components/Table/Table";
 
 function App() {
   const [dsn, setDsn] = React.useState(false);
@@ -48,6 +49,11 @@ function App() {
           />
           <button type="submit">Fetch</button>
         </form>
+        <div className="App-data">
+          {data !== null ? (
+            <Table data={data} columns={Object.keys(data[0])} />
+          ) : null}
+        </div>
       </header>
     </div>
   );
