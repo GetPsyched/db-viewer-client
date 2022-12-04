@@ -69,7 +69,6 @@ function App() {
       </section>
 
       <div className="App-header">
-        {dsn ? null : <img src={logo} className="App-logo" alt="logo" />}
         <form onSubmit={onSubmit}>
           <input
             name="dsn"
