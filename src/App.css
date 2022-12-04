@@ -1,5 +1,18 @@
+:root {
+  --sidebar-width: 20rem;
+}
+
 .App {
   text-align: center;
+  height: 100vh;
+}
+
+.App-sidebar {
+  background-color: #2a2834;
+  min-width: var(--sidebar-width);
+  max-width: var(--sidebar-width);
+  min-height: 100%;
+  height: 100%;
 }
 
 .App-logo {
@@ -13,6 +26,14 @@
   }
 }
 
+.MuiTreeView-root {
+  min-height: 100%;
+  height: auto !important;
+  height: 100%;
+  text-align: left;
+  min-width: inherit;
+}
+
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
@@ -22,6 +43,8 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+  margin-left: var(--sidebar-width);
+  margin-top: -100vh;
 }
 
 .App-link {

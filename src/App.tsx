@@ -4,12 +4,30 @@ import * as React from "react";
 import "./App.css";
 import logo from "./assets/logo.svg";
 import Table from "./components/Table/Table";
+import DatabaseTreeView from "./components/DatabaseTreeView";
 
 function App() {
   const [dsn, setDsn] = React.useState(false);
   const dsnInput = document.getElementsByName("dsn");
 
+  const [dbTree, setDbTree] = React.useState(null);
   const [data, setData] = React.useState(null);
+
+  const onSubmitDSN = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const target = event.target as typeof event.target & {
+      dsn: { value: string };
+      query: { value: string };
+    };
+    const dsn = target.dsn.value;
+
+    axios
+      .post("/schema", { dsn: dsn })
+      .then((res) => setDbTree(res.data))
+      .catch((err: Error) => {
+        console.error(err.message);
+      });
+  };
 
   const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -35,7 +53,22 @@ function App() {
 
   return (
     <div className="App">
-      <header className="App-header">
+      <section className="App-sidebar">
+        <div className="App-dsnForm">
+          <form onSubmit={onSubmitDSN}>
+            <input
+              name="dsn"
+              placeholder="postgres[ql]://[username[:password]@][host[:port],]/database[?parameter_list]"
+              type={"url"}
+              required
+            />
+            <button type="submit">Enter</button>
+          </form>
+        </div>
+        {dbTree !== null ? <DatabaseTreeView dbTree={dbTree} /> : null}
+      </section>
+
+      <div className="App-header">
         {dsn ? null : <img src={logo} className="App-logo" alt="logo" />}
         <form onSubmit={onSubmit}>
           <input
@@ -57,7 +90,7 @@ function App() {
             <Table data={data} columns={Object.keys(data[0])} />
           ) : null}
         </div>
-      </header>
+      </div>
     </div>
   );
 }
