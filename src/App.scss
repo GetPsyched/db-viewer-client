@@ -1,0 +1,72 @@
+:root {
+  --query-height: 20vh;
+  --query-width: 80vw;
+  --query-items-width: 78vw;
+  --sidebar-width: 20vw;
+}
+
+.App {
+  background-color: #313241;
+  color: #d1d4dd;
+  height: 100vh;
+  text-align: left;
+
+  #dsnInput, #queryInput {
+    background-color: inherit;
+    border-style: none;
+    color: inherit;
+  }
+}
+
+.App-tree {
+  background-color: #323848;
+  width: var(--sidebar-width);
+  height: 100%;
+
+  .App-dsnForm {
+    padding: 5%;
+
+    #dsnInput {
+      width: 17.5vw;
+    }
+  }
+
+  .MuiTreeView-root {
+    padding: 0% 5% !important;
+    height: 100vh;
+    width: calc(var(--sidebar-width) - 3vw);
+  }
+}
+
+.App-query {
+  height: var(--query-height);
+  width: var(--query-width);
+  padding: 1%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+  margin-left: var(--sidebar-width);
+  margin-top: -98vh;
+
+  #queryInput {
+    height: var(--query-height);
+    width: var(--query-items-width);
+  }
+}
+
+.App-data {
+  margin-left: var(--sidebar-width);
+  padding: 1%;
+
+  table {
+    width: var(--query-items-width);
+    border: 4px solid #3f4452;
+  }
+  th, td {
+    border: 2px solid #3f4452;
+    padding: 0.5%;
+  }
+}
