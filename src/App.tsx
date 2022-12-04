@@ -1,14 +1,12 @@
 import axios from "axios";
 import * as React from "react";
 
-import "./App.css";
-import logo from "./assets/logo.svg";
+import "./App.scss";
 import Table from "./components/Table/Table";
 import DatabaseTreeView from "./components/DatabaseTreeView";
 
 function App() {
-  const [dsn, setDsn] = React.useState(false);
-  const dsnInput = document.getElementsByName("dsn");
+  const [dsn, setDsn] = React.useState("");
 
   const [dbTree, setDbTree] = React.useState(null);
   const [data, setData] = React.useState(null);
@@ -17,9 +15,9 @@ function App() {
     event.preventDefault();
     const target = event.target as typeof event.target & {
       dsn: { value: string };
-      query: { value: string };
     };
     const dsn = target.dsn.value;
+    setDsn(dsn);
 
     axios
       .post("/schema", { dsn: dsn })
@@ -32,10 +30,8 @@ function App() {
   const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const target = event.target as typeof event.target & {
-      dsn: { value: string };
       query: { value: string };
     };
-    const dsn = target.dsn.value;
     const query = target.query.value;
 
     axios
@@ -44,51 +40,44 @@ function App() {
       .catch((err: Error) => {
         console.error(err.message);
       });
-
-    setDsn(true);
-    dsnInput.forEach((value) => {
-      value.style.display = "none";
-    });
   };
 
   return (
     <div className="App">
-      <section className="App-sidebar">
+      {/* Display div for the INFORMATION_SCHEMA tree */}
+      <div className="App-tree">
         <div className="App-dsnForm">
           <form onSubmit={onSubmitDSN}>
             <input
               name="dsn"
+              id="dsnInput"
               placeholder="postgres[ql]://[username[:password]@][host[:port],]/database[?parameter_list]"
               type={"url"}
               required
             />
-            <button type="submit">Enter</button>
           </form>
         </div>
         {dbTree !== null ? <DatabaseTreeView dbTree={dbTree} /> : null}
-      </section>
+      </div>
 
-      <div className="App-header">
+      {/* Input div for the SQL query */}
+      <div className="App-query">
         <form onSubmit={onSubmit}>
-          <input
-            name="dsn"
-            placeholder="postgres[ql]://[username[:password]@][host[:port],]/database[?parameter_list]"
-            type={"url"}
-            required
-          />
-          <input
+          <textarea
             name="query"
-            placeholder="SELECT col FROM table_name"
-            type={"text"}
+            id="queryInput"
+            placeholder="SELECT column_name FROM table_name"
             required
           />
           <button type="submit">Fetch</button>
         </form>
-        <div className="App-data">
-          {data !== null ? (
-            <Table data={data} columns={Object.keys(data[0])} />
-          ) : null}
-        </div>
+      </div>
+
+      {/* Output div for the resultant table */}
+      <div className="App-data">
+        {data !== null ? (
+          <Table data={data} columns={Object.keys(data[0])} />
+        ) : null}
       </div>
     </div>
   );
