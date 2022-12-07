@@ -10,6 +10,7 @@ function App() {
       <div className="App">
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/magic_visuals" element={<VisualMagic />} />
         </Routes>
       </div>
     </BrowserRouter>

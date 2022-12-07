@@ -23,6 +23,11 @@
   width: var(--sidebar-width);
   height: 100vh;
 
+  .visualButton {
+    float: right;
+    margin-right: 5%;
+  }
+
   .App-dsnForm {
     padding: 5%;
 

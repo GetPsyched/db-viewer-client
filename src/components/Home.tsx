@@ -59,6 +59,11 @@ function Home() {
           </form>
         </div>
         {dbTree !== null ? <DatabaseTreeView dbTree={dbTree} /> : null}
+        {dbTree !== null ? (
+          <Link to="/magic_visuals">
+            <button className="visualButton">Visualise!</button>
+          </Link>
+        ) : null}
       </div>
 
       {/* Input div for the SQL query */}
